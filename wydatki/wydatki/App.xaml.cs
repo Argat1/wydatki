@@ -7,7 +7,7 @@ namespace wydatki
 {
     public partial class App : Application
     {
-        public static string pathtxt = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "baza2.txt");
+        public static string pathtxt = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "baza3.txt");
 
 
 
@@ -17,7 +17,7 @@ namespace wydatki
 
             MainPage = new NavigationPage(new MainPage());
             
-
+            
         }
 
         protected override void OnStart()

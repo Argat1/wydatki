@@ -4,7 +4,7 @@
              x:Class="wydatki.Szczegoly">
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name="WydatkiDniaTxt" HorizontalTextAlignment="Center" Margin="20,20,20,0"/>
+            <!--<Label x:Name="WydatkiDniaTxt" HorizontalTextAlignment="Center" Margin="20,20,20,0"/>-->
             <ListView x:Name="Lista" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -12,12 +12,13 @@
                             <StackLayout>
                                 <Frame Margin="20" Padding="10">
                                     <StackLayout>
+                                        <Label Text="{Binding id}"/>
                                         <Label Text="Nazwa Wydatku :" FontAttributes="Bold"/>
-                                        <Label Text="{Binding Nazwa}"/>
+                                        <Label Text="{Binding nazwa}"/>
                                         <Label Text="Kwota Wydatku :" FontAttributes="Bold"/>
-                                        <Label TextColor="Red" Text="{Binding Path=Kwota, StringFormat='{D:F0} zł'}"/>
+                                        <Label TextColor="Red" Text="{Binding Path=kwota, StringFormat='{D:F0} zł'}"/>
                                         <Label Text="Data Wydatku :" FontAttributes="Bold"/>
-                                        <Label Text="{Binding Data}"/>
+                                        <Label Text="{Binding data}"/>
                                     </StackLayout>
                                 </Frame>
                             </StackLayout>

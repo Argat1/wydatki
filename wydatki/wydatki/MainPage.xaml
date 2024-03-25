@@ -36,6 +36,7 @@
 
     <ContentPage Title="Twoje Wydatki">
         <StackLayout>
+            <Button Clicked="Sczegoly" Text="Szczegoly"/>
             <ListView x:Name="Lista" ItemTapped="Sczegoly" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>

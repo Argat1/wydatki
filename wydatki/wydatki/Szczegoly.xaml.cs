@@ -12,12 +12,21 @@ namespace wydatki
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Szczegoly : ContentPage
     {
-        public Szczegoly()
+        Wydatek wydatek;
+        public Szczegoly(Wydatek wydatek)
         {
             InitializeComponent();
 
-          
+            this.wydatek = wydatek;
+            Display();
 
+        }
+
+        public void Display()
+        {
+            List<Wydatek> list = new List<Wydatek>();
+            list.Add(this.wydatek);
+            Lista.ItemsSource = list;
         }
     }
 }

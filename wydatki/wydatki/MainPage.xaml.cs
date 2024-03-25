@@ -25,9 +25,10 @@ namespace wydatki
         {
             base.OnAppearing();
             wyswietl();
+            
         }
         private void wyswietl()
-        {
+       3{
 
             List<string> strings = File.ReadAllLines(path).ToList();
             List<Wydatek> expenses = new List<Wydatek>();
@@ -48,7 +49,7 @@ namespace wydatki
         }
         public async void DodajWydatek(object sender, EventArgs e)
         {
-            if(File.Exists(App.pathtxt))
+            /*if(File.Exists(App.pathtxt))
             {
                 string odczytane = File.ReadAllText(App.pathtxt);
                 string zapis = odczytane + NazwaTxt.Text + ":" + KwotaTxt.Text + ":" +  DataTxt.Date.ToString() + ";";
@@ -57,7 +58,7 @@ namespace wydatki
             else
             {
                 File.WriteAllText(App.pathtxt, NazwaTxt.Text + ":" + KwotaTxt.Text + ":" + DataTxt.Date.ToString() + ";");
-            }
+            }*/
 
             Wydatek expense = new Wydatek();
             if (string.IsNullOrEmpty(NazwaTxt.Text))
@@ -75,12 +76,42 @@ namespace wydatki
 
             expensesList.Add(expense);
 
-            List<string> strings = new List<string>();
-            foreach (var item in expensesList)
+            if (File.Exists(App.pathtxt))
             {
-                strings.Add(item.nazwa + "; " + item.kwota + "; " + item.data);
+                List<string> stringsOld = File.ReadAllLines(path).ToList();
+                List<Wydatek> expenses = new List<Wydatek>();
+                Wydatek expenseOld = new Wydatek();
+                List<string> strings = new List<string>();
+                foreach (var item in stringsOld)
+                {
+                    string[] substring = item.Split(';');
+                    expenseOld.nazwa = substring[0];
+                    expenseOld.kwota = decimal.Parse(substring[1]);
+                    expenseOld.data = DateTime.Parse(substring[2]);
+                    strings.Add(expenseOld.nazwa + "; " + expenseOld.kwota + "; " + expenseOld.data + ";");
+                    
+                }
+                
+                foreach (var item in expensesList)
+                {
+                    strings.Add(item.nazwa + "; " + item.kwota + "; " + item.data + ";");
+                }
+                
+                File.WriteAllLines(path, strings);
+
             }
-            File.WriteAllLines(path, strings);
+            else
+            {
+
+                List<string> strings = new List<string>();
+                foreach (var item in expensesList)
+                {
+                    strings.Add(item.nazwa + "; " + item.kwota + "; " + item.data);
+                }
+                File.WriteAllLines(path, strings);
+            }
+
+
 
             wyswietl();
             DisplayAlert("Informacja", "Pomyślnie dodano wydatek", "OK");
@@ -94,7 +125,7 @@ namespace wydatki
             {
                 DisplayAlert("Błąd", "Wybierz element z listy", "OK");
             }
-            //Navigation.PushAsync(new Szczegoly((Lista.SelectedItem as Wydatek).data));
+            Navigation.PushAsync(new Szczegoly(expense));
 
         }
     }
