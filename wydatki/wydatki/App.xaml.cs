@@ -7,7 +7,7 @@ namespace wydatki
 {
     public partial class App : Application
     {
-        public static string pathtxt = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "baza.txt");
+        public static string pathtxt = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "baza2.txt");
 
 
 

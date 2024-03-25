@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.IO;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace wydatki
 {
-    public partial class MainPage : TabbedPage
+    public partial class MainPage : Xamarin.Forms.TabbedPage
     {
+        List<Wydatek> expensesList = new List<Wydatek>();
 
         string path = App.pathtxt;
         public MainPage()
@@ -26,6 +28,7 @@ namespace wydatki
         }
         private void wyswietl()
         {
+
             List<string> strings = File.ReadAllLines(path).ToList();
             List<Wydatek> expenses = new List<Wydatek>();
             Wydatek expense = new Wydatek();
@@ -55,10 +58,44 @@ namespace wydatki
             {
                 File.WriteAllText(App.pathtxt, NazwaTxt.Text + ":" + KwotaTxt.Text + ":" + DataTxt.Date.ToString() + ";");
             }
+
+            Wydatek expense = new Wydatek();
+            if (string.IsNullOrEmpty(NazwaTxt.Text))
+            {
+                expense.data = DataTxt.Date;
+                expense.nazwa = "Brak tytulu";
+                expense.kwota = decimal.Parse(KwotaTxt.Text);
+            }
+            else
+            {
+                expense.data = DataTxt.Date;
+                expense.nazwa = NazwaTxt.Text;
+                expense.kwota = decimal.Parse(KwotaTxt.Text);
+            }
+
+            expensesList.Add(expense);
+
+            List<string> strings = new List<string>();
+            foreach (var item in expensesList)
+            {
+                strings.Add(item.nazwa + "; " + item.kwota + "; " + item.data);
+            }
+            File.WriteAllLines(path, strings);
+
+            wyswietl();
+            DisplayAlert("Informacja", "Pomyślnie dodano wydatek", "OK");
+            NazwaTxt.Text = KwotaTxt.Text = String.Empty;
         }
         public async void Sczegoly(object sender, EventArgs e)
         {
-            
+            Wydatek expense = (Wydatek)Lista.SelectedItem;
+
+            if (expense == null)
+            {
+                DisplayAlert("Błąd", "Wybierz element z listy", "OK");
+            }
+            //Navigation.PushAsync(new Szczegoly((Lista.SelectedItem as Wydatek).data));
+
         }
     }
 }

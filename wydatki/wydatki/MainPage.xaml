@@ -40,11 +40,19 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout>
-                                <Frame Margin="20">
-                                    <Label Margin="10" FontAttributes="Bold" Text="{Binding Data}"/>
-                                </Frame>
-                            </StackLayout>
+                            <ContentView>
+                                <ContentView.Content>
+                                    <StackLayout>
+                                        <Frame Margin="20">
+                                            <StackLayout>
+                                                <Label Margin="10" FontAttributes="Bold" Text="{Binding nazwa}"/>
+                                                <Label Margin="10" FontAttributes="Bold" Text="{Binding kwota}"/>
+                                                <Label Margin="10" FontAttributes="Bold" Text="{Binding data}"/>
+                                            </StackLayout>
+                                        </Frame>
+                                    </StackLayout>
+                                </ContentView.Content>
+                            </ContentView>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
