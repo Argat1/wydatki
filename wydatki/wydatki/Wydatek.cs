@@ -5,13 +5,13 @@ using System.Text;
 
 namespace wydatki
 {
-    internal class Wydatek
+     public class Wydatek
     {
         
-        int id {  get; set; }
-        DateTime data { get; set; }
-        string nazwa { get; set; }
-        double kwota { get; set; }
+        public int id {  get; set; }
+        public DateTime data { get; set; }
+        public string nazwa { get; set; }
+        public decimal kwota { get; set; }
             
     }
 }
